@@ -16,26 +16,32 @@ class AgendaListItem extends StatelessWidget {
 
     final theme = Theme.of(context);
 
-    return Row(
-      children: [
-        Expanded(
-          child: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => ItemDetail(item)));
-            },
-            child: Text(item.name),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => ItemDetail(item)));
+              },
+              child: Text(
+                item.name,
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
           ),
-        ),
-        InkWell(
-          onTap: () {
-            context.read<DoneNotifier>().toggle(item);
-          },
-          child: Icon(Icons.check,
-              size: 28,
-              color: isDone ? theme.primaryColor : theme.primaryColorLight),
-        ),
-      ],
+          InkWell(
+            onTap: () {
+              context.read<DoneNotifier>().toggle(item);
+            },
+            child: Icon(Icons.check_box_outline_blank,
+                size: 48,
+                color: isDone ? theme.primaryColor : theme.primaryColorLight),
+          ),
+        ],
+      ),
     );
   }
 }
